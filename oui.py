@@ -1,8 +1,40 @@
+from math import floor
+
+def oulalajeroule(pdistance) :
+# acceleration de 10km/h par minute
+#7.5km en 10 min
+# 90km/h de moyenne
+# toute les 2h, 15min de pause
+  km = 0
+  x=0
+  minutes = 0
+  pause = 0
+  km_max = pdistance
+
+  while x != 100000:
+    x += 1
+    if km <= km_max:
+      if x == 120: 
+        minutes += 120
+        x -= 120
+        km_max -= 7.5
+        minutes+=35
+        pause +=1
+      elif x == 10: #quand on accelère en 10 min...
+        km += 7.5 # ...on parcour 7.5km
+        km_max -= 7.5
+        minutes += 10
+      elif x > 11 and x < 109:
+        km += 1.5 #on parcour 1.5km par minute en roulant a 90km/h
+    else:
+      break
+  return minutes, pause
+
 
 ville = {
     "Marseille Nimes": 122,
     "Marseille Perpignan": 317,
-    "Nimes Perpignan": 203
+    "Nimes Perpignan": 203,
 }
 
 # prend les villes
@@ -17,9 +49,10 @@ tri = sorted ([depart, arrive])
 trajet = "{} {}".format(tri[0], tri[1])
 distance = ville.get(trajet)
 
-# acceleration de 10km/h par minute
-# 90km/h de moyenne
-# toute les 2h, 15min de pause
 
-def acceleration() :
-    for 
+oui = oulalajeroule(distance)
+
+heure = floor(oui[0] /60)
+minutes = oui[0] % 60
+
+print("Le camionneur a mit {}h{} min avec {} pauses pour aller de {} à {}.".format(heure,minutes,oui[1],depart,arrive))
