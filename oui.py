@@ -12,11 +12,12 @@ def oulalajeroule(pdistance) :
   km_max = pdistance
 
   while x != 100000:
+    minutes += 1
     x += 1
     if km <= km_max:
-      if x == 120: 
+      if x >= 120: 
         minutes += 120
-        x -= 120
+        x = 0
         km_max -= 7.5
         minutes+=35
         pause +=1
@@ -32,20 +33,21 @@ def oulalajeroule(pdistance) :
 
 
 ville = {
+    "Annecy Marseille":421,
     "Marseille Nimes": 122,
     "Marseille Perpignan": 317,
     "Nimes Perpignan": 203,
 }
 
 # prend les villes
-print("Les villes disponnibles sont Marseille Nimes Perpignan")
+print("Les villes disponnibles sont:\nAnnecy\nMarseille\nNimes\nPerpignan")
 print("Ville de départ")
 depart = input()
 print("ville d'arrivé")
 arrive = input()
 
 #récupère la distance
-tri = sorted ([depart, arrive])
+tri = sorted([depart.capitalize(), arrive.capitalize()])
 trajet = "{} {}".format(tri[0], tri[1])
 distance = ville.get(trajet)
 
